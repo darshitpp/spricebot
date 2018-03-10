@@ -5,19 +5,19 @@ import matplotlib.pyplot as plt
 import tempfile
 
 
-alphaVantage_apiKey = 'Y9AN99NXVNEN8Y2T'
-telegramKey = '568723976:AAGOW2DNEjXLFchMc7PfKWIYuVxWRAt5cWU'
+alphaVantage_apiKey = 'Key'
+telegramKey = 'Key'
 
 
 def start(bot, update):
     getHelp(bot, update)
 
 
-def getHelp(bot, update):    
+def getHelp(bot, update):
     helpMessage = "/daily: Fetches the daily High, Low, Open, Close, Volume for a company listed on NSE \n\ne.g. <pre> /daily IDFC </pre>\n\n/crypto: Fetches the graph for Cryptocurrency in INR \n\ne.g. <pre> /crypto BTC </pre>\n\n BETA: \n/graph: Fetches the real time(1 min) graph for the companies listed on NSE. \n\ne.g. <pre> /graph IDFC </pre> shows the intraday graph for IDFC \n\n Disclaimer: This bot is a work in Progress"
     update.message.reply_html(helpMessage)
 
-def getGraph(bot, update, args):   
+def getGraph(bot, update, args):
     
     try:
         stockName = " ".join(args).upper()
@@ -37,8 +37,8 @@ def getGraph(bot, update, args):
         
 
     except:
-         message = '''You probably used the incorrect format for the command.\nUse /graph <pre>'companyName' </pre> \nFor more info, please check /help'''
-         update.message.reply_html(message)
+        message = '''You probably used the incorrect format for the command.\nUse /graph <pre>'companyName' </pre> \nFor more info, please check /help'''
+        update.message.reply_html(message)
 
 def getDaily(bot, update, args):  
     
@@ -125,7 +125,7 @@ def main():
     
     # Start the bot
     updater.start_polling()
-
+    
     # Run the bot until you press Ctrl-C
     updater.idle()
 
