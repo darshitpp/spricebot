@@ -16,7 +16,7 @@ def start(bot, update):
     getHelp(bot, update)
 
 
-def getHelp(bot, update):    
+def getHelp(bot, update):
     helpMessage = "/daily: Fetches the daily High, Low, Open, Close, Volume for a company listed on NSE \n\ne.g. <pre> /daily IDFC </pre>\n\n/crypto: Fetches the graph for Cryptocurrency in INR \n\ne.g. <pre> /crypto BTC </pre>\n\n BETA: \n/graph: Fetches the real time(1 min) graph for the companies listed on NSE. \n\ne.g. <pre> /graph IDFC </pre> shows the intraday graph for IDFC \n\n Disclaimer: This bot is a work in Progress"
     update.message.reply_html(helpMessage)
 
@@ -39,11 +39,12 @@ def getGraph(bot, update, args):
         update.message.reply_photo(img)
         
 
-    except:
+    except Exception as e:
+        logging.exception("message")
         message = '''You probably used the incorrect format for the command.\nUse /graph <pre>'companyName' </pre> \nFor more info, please check /help'''
         update.message.reply_html(message)
 
-def getDaily(bot, update, args):  
+def getDaily(bot, update, args):
     
     try:
         stockName = " ".join(args).upper()
@@ -100,7 +101,8 @@ def getCrypto(bot, update, args):
         
         update.message.reply_photo(img)
         update.message.reply_html(message)
-    except:
+    except Exception as e:
+        logging.exception("message")
         message = '''You probably used the incorrect format for the command.\nUse <pre>/crypto <pre>'companyName' </pre>\nFor more info, please check /help'''
         update.message.reply_html(message)
         
