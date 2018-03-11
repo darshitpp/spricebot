@@ -35,7 +35,6 @@ def getGraph(bot, update, args):
         plt.savefig(tmpfile, format="png")
         tmpfile.seek(0)
         img = tmpfile
-        tmpfile.flush()
         update.message.reply_photo(img)
         
 
@@ -84,7 +83,6 @@ def getCrypto(bot, update, args):
         plt.savefig(tmpfile, format="png")
         tmpfile.seek(0)
         img = tmpfile
-        tmpfile.flush()
 
         data, meta_data = cc.get_digital_currency_daily(cryptoName, market='USD')
         dataList = data.iloc[-1]
