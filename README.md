@@ -8,4 +8,4 @@ Also shows graphs of the current intraday price
 
 https://telegram.me/spricebot
 
-Want to contribute? Read the comments in the `app.py` file! I've made them as descriptive as possible!
+Want to contribute? Read the comments in the `app.py` file! I've made them very descriptive!
