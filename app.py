@@ -104,7 +104,7 @@ def getCrypto(bot, update, args):
          \n Market Cap: <em>${}</em> 
         '''.format(cryptoName, openUSD, highUSD, lowUSD, closeUSD, volume, marketCapUSD)
         
-        update.message.reply_photo(img)
+        #update.message.reply_photo(img)
         update.message.reply_html(message)
         
     except Exception as e:
