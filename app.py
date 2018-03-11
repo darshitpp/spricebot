@@ -50,7 +50,7 @@ def getDaily(bot, update, args):
         stockName = " ".join(args).upper()
         ts = TimeSeries(key=alphaVantage_apiKey, output_format='pandas')
         data, meta_data = ts.get_daily(stockName+".NS", outputsize='compact')
-        openVal, highVal, lowVal, closeVal,  volume = data.iloc[-1]
+        openVal, highVal, lowVal, closeVal, volume = data.iloc[-1]
         message = '''
         <b> {} </b> 
         \n Open: <em>₹{}</em>
@@ -87,7 +87,14 @@ def getCrypto(bot, update, args):
         tmpfile.flush()
 
         data, meta_data = cc.get_digital_currency_daily(cryptoName, market='USD')
-        openINR, openUSD, highINR, highUSD, lowINR, lowUSD, closeINR, closeUSD, volume, marketCapUSD = data.iloc[-1]
+        dataList = data.iloc[-1]
+        
+        openUSD = dataList['1a. open (USD)']
+        highUSD = dataList['2a. high (USD)']
+        lowUSD = dataList['3a. low (USD)']
+        closeUSD = dataList['4a. close (USD)']
+        volume = dataList['5. volume']
+        marketCapUSD = dataList['6. market cap (USD)']
         
         message = '''
          <b> {} </b> 
@@ -101,6 +108,7 @@ def getCrypto(bot, update, args):
         
         update.message.reply_photo(img)
         update.message.reply_html(message)
+        
     except Exception as e:
         logging.exception("message")
         message = '''You probably used the incorrect format for the command.\nUse <pre>/crypto <pre>'companyName' </pre>\nFor more info, please check /help'''
