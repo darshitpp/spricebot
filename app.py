@@ -99,7 +99,7 @@ def getCrypto(bot, update, args):
          \n Open: <em>${}</em>
          \n Close: <em>${}</em>
          \n High: <em>${}</em>
-         \n Low: <em>₹{}</em>
+         \n Low: <em>${}</em>
          \n Volume: <em>{}</em>
          \n Market Cap: <em>${}</em> 
         '''.format(cryptoName, openUSD, highUSD, lowUSD, closeUSD, volume, marketCapUSD)
