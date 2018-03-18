@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import tempfile
 import os
 import logging
+from io import BytesIO
 
 # You'd need an Alphavantage API key to get the data
 alphaVantage_apiKey = os.environ['ALPHAVANTAGE']
@@ -44,7 +45,8 @@ def getGraph(bot, update, args):
         plt.title(plotTitle)
         
         # Using a Python Util called Temporary file in order to convert the graph into a file object
-        tmpfile = tempfile.TemporaryFile(suffix=".png")
+        #tmpfile = tempfile.TemporaryFile(suffix=".png")
+        tmpfile = BytesIO()
         plt.savefig(tmpfile, format="png")
         tmpfile.seek(0)
         img = tmpfile
