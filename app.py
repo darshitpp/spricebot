@@ -9,20 +9,24 @@ import tempfile
 import os
 import logging
 from io import BytesIO
+from telegram.ext.dispatcher import run_async
 
 # You'd need an Alphavantage API key to get the data
 alphaVantage_apiKey = os.environ['ALPHAVANTAGE']
 telegramKey = os.environ['TELEGRAM']
 PORT = int(os.environ.get('PORT', '8443'))
 
+@run_async
 def start(bot, update):
     getHelp(bot, update)
 
+@run_async
 def getHelp(bot, update):
     helpMessage = "/daily: Fetches the daily High, Low, Open, Close, Volume for a company listed on NSE \n\ne.g. <pre> /daily IDFC </pre>\n\n/crypto: Fetches the graph for Cryptocurrency in INR \n\ne.g. <pre> /crypto BTC </pre>\n\n BETA: \n/graph: Fetches the real time(1 min) graph for the companies listed on NSE. \n\ne.g. <pre> /graph IDFC </pre> shows the intraday graph for IDFC \n\n Disclaimer: This bot is a work in Progress"
     # Sends the above formatted message to the user
     update.message.reply_html(helpMessage)
 
+@run_async
 def getGraph(bot, update, args):   
     
     try:
@@ -62,6 +66,7 @@ def getGraph(bot, update, args):
         # If any exception, send the message showing the frequent cause of exception
         update.message.reply_html(message)
 
+@run_async
 def getDaily(bot, update, args):
     
     try:
@@ -98,7 +103,8 @@ def getDaily(bot, update, args):
         message = '''You probably used the incorrect format for the command.\nUse /daily <pre>'companyName' </pre> \nFor more info, please check /help'''
         # If any exception, send the message showing the frequent cause of exception
         update.message.reply_html(message)
-        
+
+@run_async        
 def getCrypto(bot, update, args):
     
     try:
@@ -121,7 +127,8 @@ def getCrypto(bot, update, args):
         plt.title(plotTitle)
         
         # Using a Python Util called Temporary file in order to convert the graph into a file object
-        tmpfile = tempfile.TemporaryFile(suffix=".png")
+        #tmpfile = tempfile.TemporaryFile(suffix=".png")
+        tmpfile = BytesIO()
         plt.savefig(tmpfile, format="png")
         tmpfile.seek(0)
         img = tmpfile
@@ -148,7 +155,7 @@ def getCrypto(bot, update, args):
         '''.format(cryptoName, openUSD, highUSD, lowUSD, closeUSD, volume, marketCapUSD)
         
         # Commented the next line because it doesn't work. Id did locally though :(
-        #update.message.reply_photo(img)
+        update.message.reply_photo(img)
         
         # Sends the above formatted message to the user
         update.message.reply_html(message)
