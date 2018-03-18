@@ -44,6 +44,8 @@ def getGraph(bot, update, args):
         #Plotting the close values
         data['4. close'].plot()
         
+        plt.tight_layout()
+        
         #Setting the Graph title
         plotTitle = 'Intraday price for {} (1 min)'.format(stockName)
         plt.title(plotTitle)
