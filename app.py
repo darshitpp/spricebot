@@ -57,7 +57,7 @@ def getGraph(bot, update, args):
         
         # Currently doesn't work :(
         update.message.reply_photo(img)
-        
+        plt.close()
 
     except Exception as e:
         # Catches the exception and prints the stack trace
@@ -65,6 +65,7 @@ def getGraph(bot, update, args):
         message = '''You probably used the incorrect format for the command.\nUse /graph <pre>'companyName' </pre> \nFor more info, please check /help'''
         # If any exception, send the message showing the frequent cause of exception
         update.message.reply_html(message)
+        
 
 @run_async
 def getDaily(bot, update, args):
@@ -156,7 +157,8 @@ def getCrypto(bot, update, args):
         
         # Commented the next line because it doesn't work. Id did locally though :(
         update.message.reply_photo(img)
-        
+        plt.close()
+
         # Sends the above formatted message to the user
         update.message.reply_html(message)
         
