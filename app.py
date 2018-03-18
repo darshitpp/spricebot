@@ -5,7 +5,6 @@ import matplotlib
 # Added the next line because apparently, heroku doesn't support matplotlib using tkinter (which it uses by default)
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import tempfile
 import os
 import logging
 from io import BytesIO
@@ -22,7 +21,14 @@ def start(bot, update):
 
 @run_async
 def getHelp(bot, update):
-    helpMessage = "/daily: Fetches the daily High, Low, Open, Close, Volume for a company listed on NSE \n\ne.g. <pre> /daily IDFC </pre>\n\n/crypto: Fetches the graph for Cryptocurrency in INR \n\ne.g. <pre> /crypto BTC </pre>\n\n BETA: \n/graph: Fetches the real time(1 min) graph for the companies listed on NSE. \n\ne.g. <pre> /graph IDFC </pre> shows the intraday graph for IDFC \n\n Disclaimer: This bot is a work in Progress"
+    helpMessage = '''/daily: Fetches the daily High, Low, Open, Close, Volume for a company listed on NSE \n\n
+    e.g. <pre> /daily IDFC </pre>\n\n
+    /crypto: Fetches the graph for Cryptocurrency in INR \n\n
+    e.g. <pre> /crypto BTC </pre>\n\n
+    /graph: Fetches the real time(1 min) graph for the companies listed on NSE. \n\n
+    e.g. <pre> /graph IDFC </pre> shows the intraday graph for IDFC \n\n
+    Disclaimer: This bot is a work in Progress'''
+    
     # Sends the above formatted message to the user
     update.message.reply_html(helpMessage)
 
