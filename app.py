@@ -51,7 +51,7 @@ def getGraph(bot, update, args):
         data['4. close'].plot()
         
         plt.tight_layout()
-        
+        plt.grid()
         #Setting the Graph title
         plotTitle = 'Intraday price for {} (1 min)'.format(stockName)
         plt.title(plotTitle)
@@ -63,7 +63,6 @@ def getGraph(bot, update, args):
         tmpfile.seek(0)
         img = tmpfile
         
-        # Currently doesn't work :(
         update.message.reply_photo(img)
         plt.close()
 
@@ -130,6 +129,7 @@ def getCrypto(bot, update, args):
         data['1a. price (USD)'].plot()
         # To show all of the graph, since crypto prices can spike a lot
         plt.tight_layout()
+        plt.grid()
         
         #Setting the Graph title
         plotTitle = 'Intraday price for {}'.format(cryptoName)
@@ -163,7 +163,6 @@ def getCrypto(bot, update, args):
          \n Market Cap: <em>${}</em> 
         '''.format(cryptoName, openUSD, highUSD, lowUSD, closeUSD, volume, marketCapUSD)
         
-        # Commented the next line because it doesn't work. Id did locally though :(
         update.message.reply_photo(img)
         plt.close()
 
