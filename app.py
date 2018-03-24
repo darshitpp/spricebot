@@ -9,6 +9,8 @@ import os
 import logging
 from io import BytesIO
 from telegram.ext.dispatcher import run_async
+import pandas as pd
+import pytz
 
 # You'd need an Alphavantage API key to get the data
 alphaVantage_apiKey = os.environ['ALPHAVANTAGE']
@@ -44,13 +46,16 @@ def getGraph(bot, update, args):
         
         # Calls the method to fetch intraday prices
         # The .NS is to let the API know we want the prices from NSE
-        data, meta_data = ts.get_intraday(stockName+".NS", outputsize='compact')
+        data, meta_data = ts.get_intraday(stockName+".NS", interval='1min', outputsize='compact')
         # Find the documentation of the Alphavantage API at https://github.com/RomelTorres/alpha_vantage
+        
+        data['datetime'] = data.index        
+        indianTimeZone = pytz.timezone('Asia/Kolkata')
+        data['datetime'] = pd.to_datetime(data['datetime']).dt.tz_localize(pytz.utc).dt.tz_convert(indianTimeZone)
         
         #Plotting the close values
         data['4. close'].plot()
         
-        plt.tight_layout()
         plt.grid()
         #Setting the Graph title
         plotTitle = 'Intraday price for {} (1 min)'.format(stockName)
